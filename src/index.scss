@@ -1,0 +1,21 @@
+body {
+  background: #ddd;
+  
+  .container {
+    position: relative;
+    top: 200px;
+    display: flexbox;
+//    border: 1px dashed red;
+    text-align: center; 
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+};
+
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
