@@ -1,74 +1,53 @@
 import React from 'react';
 import { Frame, addPropertyControls, ControlType } from 'framer';
-import { Jump } from './Test';
+import { motion } from 'framer-motion';
 
 const App = () => {
-  const str = Array.from("Hello world");
-
-  const containerVariants = {
-     before: {},
-     after: { transition: { staggerChildren: 0.05  } },
-  };   
+  const str = Array.from("Hello");
 
   const letterVariants = {
     before: {
       opacity: 0,
       y: 20,
       transition: {
-        type: "string",
-        damping: 16,
-        stiffness: 200,
+        type: "spring",
       },
     },
     after: {
       opacity: 1,
       y: 0,
       transition: {
-        type: "string",
-        damping: 16,
-        stiffness: 200,
+        type: "spring",
       },
     },
-  };
+  }
 
-  
+  const variants = {
+    before: {},
+    after: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    }
+  }
+
   return (
-    <div>
-     <Jump/>  
+    <Frame>
       <Frame
-      size={"100%"}
-      background={ "rgba(111, 111, 111, 0.5)" }>
-        <Frame
-        center={"y"}
-        height={26}
-        width={"100%"}
-        background={""}
-        style={{
-            fontFamily: "Montserrat, Work Sans, sans-serif",
-            fontWeight: "bold",
-            letterSpacing: "-0.04em",
-            fontSize: 26,
-            color: "#000",
-            display: "flex",
-            justifyContent: "center",
-        }}
-        variants={containerVariants}
-        initial={"before"}
-        animate={"after"}>
-      
-          {str.map((letter, i) => (
-            <Frame key={i}
-              width={"auto"}
-              height={26}
-              background={""}
-              variants={letterVariants}
-              style={{ position: "relative" }}>
-                { letter === " " ? "\u00A0" : letter }
-            </Frame>
-          ))}
+      variants={ variants }
+      initial={ "before" }
+      animate={ "after" }
+      style={{ display: "flex", justifyContent: "center", fontSpacing: "-0.04rem", fontSize: 36 }}>
+          { str.map((letter, index) => <Frame
+                                key={ index }
+                                width={ "auto" }
+                                height={ 26 }
+                                background={ "" }
+                                style={{ position: "relative" }}
+                                variants={ letterVariants }>
+                          { letter }</Frame>)}
       </Frame>
     </Frame>
-    </div>
   );
 }
 
